@@ -21,7 +21,7 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
-    @OneToMany(mappedBy = "owner")
+    // @OneToMany(mappedBy = "owner")
     private List<String> cars = new ArrayList<>();
     // CHANGE TO List<Car> WHEN CAR ENTITY EXISTS
 
