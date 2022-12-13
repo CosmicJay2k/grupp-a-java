@@ -1,6 +1,6 @@
 package com.example.gruppajava.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,9 +24,9 @@ public class ParkingEvent {
     // private Car car;
     private int carId;
     @Column(name = "start_time", nullable = false)
-    private Date startTime;
+    private LocalDateTime startTime;
     @Column(name = "end_time", nullable = false)
-    private Date endTime;
+    private LocalDateTime endTime;
     // Fix when parkingslot entity exists.
     // @OneToOne
     // @JoinColumn(name = "slot_id", referencedColumnName = "id")
@@ -63,19 +63,19 @@ public class ParkingEvent {
         this.carId = carId;
     }
 
-    public Date getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
