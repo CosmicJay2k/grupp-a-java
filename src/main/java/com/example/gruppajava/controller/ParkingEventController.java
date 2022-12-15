@@ -48,7 +48,7 @@ public class ParkingEventController {
 
     // Get parking event by car id.
     @GetMapping("/car/{id}")
-    public Iterable<ParkingEvent> getParkingEventByCarId(@PathVariable int id) {
+    public Iterable<ParkingEvent> getParkingEventByCarId(@PathVariable int id) /*<- Long id when car entity exists.*/ {
         return parkingEventRepository.findByCarId(id);
     }
 
