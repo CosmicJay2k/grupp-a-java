@@ -32,9 +32,10 @@ public class ParkingEvent {
     // @JoinColumn(name = "slot_id", referencedColumnName = "id")
     // private ParkingSlot parkingslot;
     private int slotId;
-    @Column(name = "is_active")
+    @Column(name = "is_active", nullable = false)
     private boolean isActive;
-    private boolean paid;
+    @Column(name = "is_paid", nullable = false)
+    private boolean isPaid;
 
     // Getters and setters.
     public Long getId() {
@@ -98,11 +99,13 @@ public class ParkingEvent {
     }
 
     public boolean isPaid() {
-        return paid;
+        return isPaid;
     }
 
-    public void setPaid(boolean paid) {
-        this.paid = paid;
+    public void setPaid(boolean isPaid) {
+        this.isPaid = isPaid;
     }
+
+    
     
 }
