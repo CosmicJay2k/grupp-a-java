@@ -21,15 +21,13 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
-    // @OneToMany(mappedBy = "owner")
-    private List<String> cars = new ArrayList<>();
-    // CHANGE TO List<Car> WHEN CAR ENTITY EXISTS
+    @OneToMany(mappedBy = "user")
+    private List<Car> cars = new ArrayList<>();
 
     protected User() {
     }
 
-    public User(String firstName, String lastName, String cars) {
-        // CHANGE TO Car cars WHEN CAR ENTITY EXISTS
+    public User(String firstName, String lastName, Car cars) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.cars.add(cars);
@@ -64,13 +62,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public List<String> getCars() {
+    public List<Car> getCars() {
         return cars;
     }
-    // CHANGE TO List<Car> WHEN CAR ENTITY EXISTS
 
-    public void setCars(List<String> cars) {
+    public void setCars(List<Car> cars) {
         this.cars = cars;
     }
-    // CHANGE TO List<Car> WHEN CAR ENTITY EXISTS
 }
