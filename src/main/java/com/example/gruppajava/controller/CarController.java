@@ -40,6 +40,7 @@ public class CarController {
 //POST
   record addCarReq(
     String licensePlateNr,
+    String model,
     Long userId
   ){}
 
@@ -48,6 +49,7 @@ public class CarController {
 
     Car car = new Car( 
       req.licensePlateNr,
+      req.model,
       userRepo.findById(req.userId).isPresent() 
         ? userRepo.findById(req.userId).get() 
         : null

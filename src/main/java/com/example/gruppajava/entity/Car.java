@@ -25,6 +25,7 @@ public class Car {
   )
   private Long id;
   private String LicensePlateNr;
+  private String model;
 
   @ManyToOne()
   @JoinColumn(name = "user_id")
@@ -38,8 +39,9 @@ public class Car {
     this.LicensePlateNr = licensePlateNr;
   }
 
-  public Car(String licensePlateNr, User user) {
+  public Car(String licensePlateNr, String model, User user) {
     this.LicensePlateNr = licensePlateNr;
+    this.model = model;
     this.user = user;
   }
 
@@ -58,6 +60,15 @@ public class Car {
 
   public void setLicensePlateNr(String licensePlateNr) {
     LicensePlateNr = licensePlateNr;
+  }
+
+  
+  public String getModel() {
+    return model;
+  }
+
+  public void setModel(String model) {
+    this.model = model;
   }
 
   public User getUser() {
