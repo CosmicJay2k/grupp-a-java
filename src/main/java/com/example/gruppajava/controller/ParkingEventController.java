@@ -33,13 +33,13 @@ public class ParkingEventController {
     // Create a new parking event.
     @PostMapping("parkingevents")
     public ParkingEvent addParkingEvent(@RequestBody Map<String, String> body) {
-        Long carId = Long.parseLong(body.get("carId"));
         Long userId = Long.parseLong(body.get("userId"));
+        Long carId = Long.parseLong(body.get("carId"));
         int parkingslotId = Integer.parseInt(body.get("parkingslotId"));
 
         ParkingEvent parkingEvent = new ParkingEvent();
-        parkingEvent.setCar(carRepository.findById(carId).get());
         parkingEvent.setUser(userRepository.findById(userId).get());
+        parkingEvent.setCar(carRepository.findById(carId).get());
         parkingEvent.setSlotId(parkingslotId);
         parkingEvent.setStartTime(LocalDateTime.now());
         parkingEvent.setEndTime(LocalDateTime.now().plusMinutes(10));
