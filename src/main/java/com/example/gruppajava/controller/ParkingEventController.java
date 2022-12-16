@@ -14,7 +14,7 @@ import com.example.gruppajava.entity.ParkingEvent;
 import com.example.gruppajava.repository.ParkingEventRepository;
 
 @RestController
-@RequestMapping("/api/parkingevent")
+@RequestMapping("/api/parkingevents")
 public class ParkingEventController {
     @Autowired ParkingEventRepository parkingEventRepository;
 
