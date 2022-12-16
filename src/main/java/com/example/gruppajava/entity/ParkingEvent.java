@@ -2,6 +2,9 @@ package com.example.gruppajava.entity;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class ParkingEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,11 +22,9 @@ public class ParkingEvent {
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
-    // Fix when car entity exists.
-    // @OneToOne
-    // @JoinColumn(name = "car_id", referencedColumnName = "id")
-    // private Car car;
-    private int carId;
+    @OneToOne
+    @JoinColumn(name = "car_id", referencedColumnName = "id", nullable = false)
+    private Car car;
     @Column(name = "start_time", nullable = false)
     private LocalDateTime startTime;
     @Column(name = "end_time", nullable = false)
@@ -54,14 +56,12 @@ public class ParkingEvent {
         this.user = user;
     }
 
-    // Fix when car entity exists.
-    public int getCarId() {
-        return carId;
+    public Car getCar() {
+        return car;
     }
 
-    // Fix when car entity exists.
-    public void setCarId(int carId) {
-        this.carId = carId;
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     public LocalDateTime getStartTime() {
@@ -106,6 +106,4 @@ public class ParkingEvent {
         this.isPaid = isPaid;
     }
 
-    
-    
 }
