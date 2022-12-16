@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  DB:
+    container_name: GruppA-DB
+    image: mysql:latest
+    environment: 
+      - MYSQL_USER=${SPRING_DATASOURCE_USER}
+      - MYSQL_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+      - MYSQL_DATABASE=${SQL_SERVER_NAME}
+    restart: always
+    ports:
+      - "3306:3306"
