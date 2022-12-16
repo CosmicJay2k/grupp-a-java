@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,6 +54,14 @@ public class ParkingEventController {
     @GetMapping("parkingevents/{id}")
     public ParkingEvent getParkingEventById(@PathVariable Long id) {
         return parkingEventRepository.findById(id).get();
+    }
+
+    // Patch parking event by id. Adds 10 more minutes to end time.
+    @PatchMapping("parkingevents/{id}")
+    public ParkingEvent patchParkingEventById(@PathVariable Long id) {
+        ParkingEvent parkingEvent = parkingEventRepository.findById(id).get();
+        parkingEvent.setEndTime(parkingEvent.getEndTime().plusMinutes(10));
+        return parkingEventRepository.save(parkingEvent);
     }
 
     // Get parking event by user id.
