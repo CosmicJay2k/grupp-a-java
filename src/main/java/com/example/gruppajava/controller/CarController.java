@@ -38,14 +38,14 @@ public class CarController {
 
 
 //POST
-  record addCarReq(
+  record AddCarReq(
     String licensePlateNr,
     String model,
     Long userId
   ){}
 
   @PostMapping("/api/car")
-  public ResponseEntity<Car> addCar(@RequestBody addCarReq req) {
+  public ResponseEntity<Car> addCar(@RequestBody AddCarReq req) {
 
     Car car = new Car( 
       req.licensePlateNr,
