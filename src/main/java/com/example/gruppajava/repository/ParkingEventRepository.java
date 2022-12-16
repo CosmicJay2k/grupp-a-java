@@ -8,6 +8,6 @@ public interface ParkingEventRepository extends JpaRepository<ParkingEvent, Long
 
     Iterable<ParkingEvent> findByUserId(Long id);
 
-    Iterable<ParkingEvent> findByCarId(int id); /*<- Long id when car entity exists. */
+    Iterable<ParkingEvent> findByCarId(Long id);
     
 }
