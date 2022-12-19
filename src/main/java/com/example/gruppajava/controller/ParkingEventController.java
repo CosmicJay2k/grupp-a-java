@@ -1,9 +1,11 @@
 package com.example.gruppajava.controller;
 
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.gruppajava.entity.ParkingEvent;
 import com.example.gruppajava.repository.CarRepository;
@@ -33,7 +36,7 @@ public class ParkingEventController {
 
     // Create a new parking event.
     @PostMapping("parkingevents")
-    public ParkingEvent addParkingEvent(@RequestBody Map<String, String> body) {
+    public ResponseEntity<ParkingEvent> addParkingEvent(@RequestBody Map<String, String> body) {
         Long userId = Long.parseLong(body.get("userId"));
         Long carId = Long.parseLong(body.get("carId"));
         int parkingslotId = Integer.parseInt(body.get("parkingslotId"));
@@ -46,8 +49,15 @@ public class ParkingEventController {
         parkingEvent.setEndTime(LocalDateTime.now().plusMinutes(10));
         parkingEvent.setActive(true);
         parkingEvent.setPaid(false);
+        parkingEventRepository.save(parkingEvent);
         
-        return parkingEventRepository.save(parkingEvent);
+        URI location = ServletUriComponentsBuilder
+        .fromCurrentRequest()
+        .path("/{id}")
+        .buildAndExpand(parkingEvent.getId())
+        .toUri();
+
+        return ResponseEntity.created(location).body(parkingEvent);
     }
 
     // Get parking event by id.
