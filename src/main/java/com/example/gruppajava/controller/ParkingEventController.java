@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -66,13 +67,20 @@ public class ParkingEventController {
         return parkingEventRepository.findById(id).get();
     }
 
-    // Patch parking event by id. Adds 10 more minutes to end time.
+    // Patch parking event by id. Adds x minutes to the parking event. example: (/api/parkingevents/{ID}?eventDurationMin={MINUTES})
     @PatchMapping("parkingevents/{id}")
-    public ParkingEvent patchParkingEventById(@PathVariable Long id) {
-        ParkingEvent parkingEvent = parkingEventRepository.findById(id).get();
-        parkingEvent.setEndTime(parkingEvent.getEndTime().plusMinutes(10));
-        return parkingEventRepository.save(parkingEvent);
-    }
+    public ResponseEntity<ParkingEvent> patchParkingEventById(@PathVariable Long id, @RequestParam("eventDurationMin") int eventDurationMin) {
+    ParkingEvent parkingEvent = parkingEventRepository.findById(id).get();
+    parkingEvent.setEndTime(parkingEvent.getEndTime().plusMinutes(eventDurationMin));
+
+    URI location = ServletUriComponentsBuilder
+        .fromCurrentRequest()
+        .path("/{id}")
+        .queryParam("eventDurationMin", eventDurationMin)
+        .buildAndExpand(parkingEvent.getId())
+        .toUri();
+        return ResponseEntity.created(location).body(parkingEvent);
+}
 
     // Get parking event by user id.
     @GetMapping("parkingevents/user/{id}")
