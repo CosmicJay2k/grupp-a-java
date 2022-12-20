@@ -35,13 +35,13 @@ public class UserControllerTest {
 
     @Test
     void getUserShouldReturn200OK() throws Exception {
-        mvc.perform(get("/api/user"))
+        mvc.perform(get("/api/users"))
                 .andExpect(status().isOk());
     }
 
     @Test
     void getUserShouldGiveListOfUsers() throws Exception {
-        mvc.perform(get("/api/user"))
+        mvc.perform(get("/api/users"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().json("[]"));
     }
@@ -50,7 +50,7 @@ public class UserControllerTest {
     void getUserWithIdShouldGiveSingleUser() throws Exception {
         Mockito.when(userRepository.findById(ArgumentMatchers.any())).thenReturn(Optional.of(myUser));
 
-        mvc.perform(get("/api/user/1"))
+        mvc.perform(get("/api/users/1"))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().json(asJsonString(myUser)));
     }
@@ -60,7 +60,7 @@ public class UserControllerTest {
         Mockito.when(userRepository.save(ArgumentMatchers.any())).thenReturn(myUser);
 
         mvc.perform(MockMvcRequestBuilders
-                .post("/api/user")
+                .post("/api/users")
                 .content(asJsonString(myUser))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
