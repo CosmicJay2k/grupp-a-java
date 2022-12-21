@@ -11,3 +11,13 @@ services:
     restart: always
     ports:
       - "3306:3306"
+  keycloak_client:
+    image: quay.io/keycloak/keycloak:20.0.2
+    environment:
+     - KEYCLOAK_ADMIN=${KEYCLOACK_ADMIN_NAME}
+     - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOACK_ADMIN_PASSWORD}
+    command: start-dev
+    volumes: 
+      -  ./keycloak/realms:/opt/keycloak/data/import
+    ports:
+      - "8000:8080"
