@@ -16,7 +16,8 @@ services:
     environment:
      - KEYCLOAK_ADMIN=${KEYCLOACK_ADMIN_NAME}
      - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOACK_ADMIN_PASSWORD}
-    command: start-dev
+    command:
+     start-dev&&--db=mysql --features=token-exchange&&db-url="http://localhost:3306" --db-username=${SPRING_DATASOURCE_USER} --db-password=${SPRING_DATASOURCE_PASSWORD}
     volumes: 
       -  ./keycloak/realms:/opt/keycloak/data/import
     ports:
