@@ -14,10 +14,10 @@ services:
   keycloak_client:
     image: quay.io/keycloak/keycloak:20.0.2
     environment:
-     - KEYCLOAK_ADMIN=${KEYCLOACK_ADMIN_NAME}
-     - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOACK_ADMIN_PASSWORD}
+     - KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN_NAME}
+     - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD}
     command:
-     start-dev&&--db=mysql --features=token-exchange&&db-url="http://localhost:3306" --db-username=${SPRING_DATASOURCE_USER} --db-password=${SPRING_DATASOURCE_PASSWORD}
+     start-dev --import-realm&&--db=mysql --features=token-exchange&&db-url="http://localhost:3306" --db-username=${SPRING_DATASOURCE_USER} --db-password=${SPRING_DATASOURCE_PASSWORD}
     volumes: 
       -  ./keycloak/realms:/opt/keycloak/data/import
     ports:
