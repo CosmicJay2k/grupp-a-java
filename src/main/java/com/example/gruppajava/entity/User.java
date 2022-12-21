@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +22,8 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
+    @Column(nullable = false, unique = true)
+    private String email;
     @OneToMany(mappedBy = "user")
     private List<Car> cars = new ArrayList<>();
 
@@ -31,6 +34,12 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.cars.add(cars);
+    }
+
+    public User(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
     }
 
     public User(String firstName, String lastName) {
@@ -68,5 +77,13 @@ public class User {
 
     public void setCars(List<Car> cars) {
         this.cars = cars;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
