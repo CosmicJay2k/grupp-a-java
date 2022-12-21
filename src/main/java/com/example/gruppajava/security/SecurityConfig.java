@@ -24,7 +24,9 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/**").authenticated()
                 .requestMatchers(HttpMethod.GET, "/index.html").anonymous()
                 .requestMatchers(HttpMethod.GET, "/loggedin.html").anonymous()
+                .requestMatchers(HttpMethod.GET, "/mypage.html").anonymous()
                 .requestMatchers(HttpMethod.GET, "/js/js.js").anonymous()
+                .requestMatchers(HttpMethod.GET, "/js/mypage.js").anonymous()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
@@ -34,7 +36,7 @@ public class SecurityConfig {
     @Bean
     public JwtDecoder jwtDecoder() {
         return NimbusJwtDecoder
-                .withJwkSetUri("http://localhost:8081/realms/sharkPark/protocol/openid-connect/certs")
+                .withJwkSetUri("http://localhost:8000/realms/sharkPark/protocol/openid-connect/certs")
                 .jwsAlgorithm(SignatureAlgorithm.ES256)
                 .build();
     }
