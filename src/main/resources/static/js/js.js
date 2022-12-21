@@ -1,4 +1,4 @@
-let keycloakUrl = "http://localhost:8081";
+let keycloakUrl = "http://localhost:8000";
 let keycloakJsSrc = keycloakUrl + "/js/keycloak.js";
 
 var script = document.createElement("script");
@@ -24,13 +24,14 @@ window.onload = function () {
         showProfile();
         addUserToDatabase();
       } else {
-        showWelcome();
       }
     })
     .catch(function () {
       alert("failed to initialize");
     });
   keycloak.onAuthLogout = showWelcome;
+  keycloak.onAuthLogout = localStorage.removeItem("data");
+  keycloak.onAuthLogout = localStorage.removeItem("token");
 };
 
 function addUserToDatabase() {
@@ -43,6 +44,10 @@ function addUserToDatabase() {
     lastName: lastname,
     email: email,
   };
+
+  window.localStorage.setItem("data",  JSON.stringify(data));
+  window.localStorage.setItem("token", keycloak.token) 
+
   const url = "http://localhost:8080/api/user";
   const req = new XMLHttpRequest();
   req.open("POST", url, true);
