@@ -15,6 +15,7 @@ services:
     image: quay.io/keycloak/keycloak:20.0.2
     volumes:
       - ./keycloak/realms/:/opt/keycloak/data/import
+      - ./keycloak/style/:/opt/keycloak/themes/myTheme
     environment:
       - KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN_NAME}
       - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD}
