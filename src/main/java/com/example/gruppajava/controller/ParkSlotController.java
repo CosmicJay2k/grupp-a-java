@@ -37,6 +37,12 @@ public class ParkSlotController {
     return parkslotRepo.findById(id).get();
   }
 
+  // return list of park slots depending on (available) parameter /api/parkslot/?available=true or false
+  @GetMapping("/api/parkslot/")
+  public List<ParkSlot> getAllConditionParkSlots(@RequestParam boolean available){
+    return parkslotRepo.findAllByAvailable(available);
+  }
+  
   // POST POST POST POST
   record addParkSlotReq(
     long zone_id, //ParkPriceZone zone,
