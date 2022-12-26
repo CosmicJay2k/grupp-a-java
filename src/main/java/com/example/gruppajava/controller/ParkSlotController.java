@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -59,5 +60,15 @@ public class ParkSlotController {
       .toUri();
     return ResponseEntity.created(location).body(parkslot);
   }
-  
+
+  // PATCH PATCH PATCH PATCH
+  // change the available condition of a park slot using it's (id)
+  @PatchMapping("/api/parkslot/{id}/change")
+  public ParkSlot modParkSlot(@PathVariable Long id) {
+    var modParkSlot = parkslotRepo.findById(id).get(); //.isPresent()? parkslotRepo.findById(id).get():null;
+    modParkSlot.setAvailable(!modParkSlot.getAvailable());
+    parkslotRepo.save(modParkSlot);
+    return modParkSlot;
+  }
+
 }
