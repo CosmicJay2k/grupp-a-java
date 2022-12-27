@@ -70,7 +70,7 @@ public class ParkSlotController {
 
   // PATCH PATCH PATCH PATCH
   // change the available condition of a park slot using it's (id)
-  // /api/parkslot/{id}/change will reverse the available boolean 
+  // /api/parkslot/{id} will reverse the available boolean 
   @PatchMapping("/api/parkslots/{id}")
   public ParkSlot modParkSlot(@PathVariable Long id) {
     var modParkSlot = parkslotRepo.findById(id).get(); //.isPresent()? parkslotRepo.findById(id).get():null;
