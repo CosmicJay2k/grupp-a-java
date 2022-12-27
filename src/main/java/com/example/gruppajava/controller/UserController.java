@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +16,6 @@ import com.example.gruppajava.entity.User;
 import com.example.gruppajava.repository.CarRepository;
 import com.example.gruppajava.repository.UserRepository;
 
-@CrossOrigin(origins = "*")
 @RestController
 public class UserController {
 
