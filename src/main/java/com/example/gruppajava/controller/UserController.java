@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -15,6 +16,7 @@ import com.example.gruppajava.entity.User;
 import com.example.gruppajava.repository.UserRepository;
 
 @RestController
+@RequestMapping("/api/")
 public class UserController {
 
     UserRepository userRepository;
@@ -23,7 +25,7 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/api/user")
+    @PostMapping("users")
     public ResponseEntity<User> addUser(@RequestBody User user) {
         var newUser = userRepository.save(user);
 
@@ -36,12 +38,12 @@ public class UserController {
         return ResponseEntity.created(location).body(newUser);
     }
 
-    @GetMapping("/api/user/{id}")
+    @GetMapping("users/{id}")
     public User getUserById(@PathVariable Long id) {
         return userRepository.findById(id).get();
     }
 
-    @GetMapping("/api/user")
+    @GetMapping("users")
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
