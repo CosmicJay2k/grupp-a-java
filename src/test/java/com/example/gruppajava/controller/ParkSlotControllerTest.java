@@ -36,13 +36,13 @@ public class ParkSlotControllerTest {
 
   @Test
   void getParkSlotShouldReturn200OK() throws Exception {
-      mvc.perform(get("/api/parkslot"))
+      mvc.perform(get("/api/parkslots"))
         .andExpect(status().isOk());
   }
 
   @Test
   void getParkSlotShouldGiveListOfParkSlots() throws Exception{
-    mvc.perform(get("/api/parkslot"))
+    mvc.perform(get("/api/parkslots"))
       .andExpect(content().contentType(MediaType.APPLICATION_JSON))
       .andExpect(content().json("[]"));
   }
@@ -53,7 +53,7 @@ public class ParkSlotControllerTest {
   void getParkSlotWithIdShouldGiveSingleParkSlot() throws Exception{
     Mockito.when(parkslotRepository.findById(ArgumentMatchers.any()))
       .thenReturn(Optional.of(aParkSlot));
-    mvc.perform(get("/api/parkslot/1"))
+    mvc.perform(get("/api/parkslots/1"))
       .andExpect(content().contentType(MediaType.APPLICATION_JSON))
       .andExpect(content().json(asJsonString(aParkSlot)));
   }
@@ -63,7 +63,7 @@ public class ParkSlotControllerTest {
     Mockito.when(parkslotRepository.save(ArgumentMatchers.any())).thenReturn(aParkSlot);
 
     mvc.perform(MockMvcRequestBuilders
-      .post("/api/parkslot")
+      .post("/api/parkslots")
       .content(asJsonString(aParkSlot))
       .contentType(MediaType.APPLICATION_JSON)
       .accept(MediaType.APPLICATION_JSON))
