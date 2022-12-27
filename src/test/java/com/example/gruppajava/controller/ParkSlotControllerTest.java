@@ -9,6 +9,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.example.gruppajava.entity.ParkSlot;
 import com.example.gruppajava.repository.ParkSlotRepository;
@@ -46,7 +48,7 @@ public class ParkSlotControllerTest {
   }
 
   ParkSlot aParkSlot = new ParkSlot(55300, true);
-  
+
   @Test
   void getParkSlotWithIdShouldGiveSingleParkSlot() throws Exception{
     Mockito.when(parkslotRepository.findById(ArgumentMatchers.any()))
@@ -56,6 +58,18 @@ public class ParkSlotControllerTest {
       .andExpect(content().json(asJsonString(aParkSlot)));
   }
 
+  @Test
+  void postParkSlotShouldReturn201CreatedAndResponseEntity() throws Exception{
+    Mockito.when(parkslotRepository.save(ArgumentMatchers.any())).thenReturn(aParkSlot);
+
+    mvc.perform(MockMvcRequestBuilders
+      .post("/api/parkslot")
+      .content(asJsonString(aParkSlot))
+      .contentType(MediaType.APPLICATION_JSON)
+      .accept(MediaType.APPLICATION_JSON))
+      .andExpect(status().isCreated())
+      .andExpect(MockMvcResultMatchers.jsonPath("$.zone_id").exists());
+  }
 
   public static String asJsonString(final Object obj) {
     try {
