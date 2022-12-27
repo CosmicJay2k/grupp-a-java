@@ -27,19 +27,19 @@ public class ParkSlotController {
 
   // GET GET GET GET
   // return all park slots
-  @GetMapping("/api/parkslot")
+  @GetMapping("/api/parkslots")
   public List<ParkSlot> getAllParkSlots(){
   return parkslotRepo.findAll();
   }
 
   // return one park slot depending on (id) parameter
-  @GetMapping("/api/parkslot/{id}")
+  @GetMapping("/api/parkslots/{id}")
   public ParkSlot getParkSlot(@PathVariable Long id) {
     return parkslotRepo.findById(id).get();
   }
 
   // return list of park slots depending on (available) parameter /api/parkslot/?available=true or false
-  @GetMapping("/api/parkslot/")
+  @GetMapping("/api/parkslots/")
   public List<ParkSlot> getAllConditionParkSlots(@RequestParam boolean available){
     return parkslotRepo.findAllByAvailable(available);
   }
@@ -51,7 +51,7 @@ public class ParkSlotController {
   ){}
 
   // add a new park slot, (id) generated automatically
-  @PostMapping("/api/parkslot")
+  @PostMapping("/api/parkslots")
   public ResponseEntity<ParkSlot> addParkSlot(@RequestBody addParkSlotReq req){
     ParkSlot parkslot = new ParkSlot(
       req.zone_id,
@@ -71,7 +71,7 @@ public class ParkSlotController {
   // PATCH PATCH PATCH PATCH
   // change the available condition of a park slot using it's (id)
   // /api/parkslot/{id}/change will reverse the available boolean 
-  @PatchMapping("/api/parkslot/{id}/change")
+  @PatchMapping("/api/parkslots/{id}")
   public ParkSlot modParkSlot(@PathVariable Long id) {
     var modParkSlot = parkslotRepo.findById(id).get(); //.isPresent()? parkslotRepo.findById(id).get():null;
     modParkSlot.setAvailable(!modParkSlot.getAvailable());
