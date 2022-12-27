@@ -1,17 +1,23 @@
 package com.example.gruppajava.controller;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
+import com.example.gruppajava.entity.ParkSlot;
 import com.example.gruppajava.repository.ParkSlotRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import java.util.Optional;
 
 @WebMvcTest(ParkSlotController.class)
 @AutoConfigureMockMvc(addFilters = false)
@@ -39,6 +45,16 @@ public class ParkSlotControllerTest {
       .andExpect(content().json("[]"));
   }
 
+  ParkSlot aParkSlot = new ParkSlot(55300, true);
+  
+  @Test
+  void getParkSlotWithIdShouldGiveSingleParkSlot() throws Exception{
+    Mockito.when(parkslotRepository.findById(ArgumentMatchers.any()))
+      .thenReturn(Optional.of(aParkSlot));
+    mvc.perform(get("/api/parkslot/1"))
+      .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+      .andExpect(content().json(asJsonString(aParkSlot)));
+  }
 
 
   public static String asJsonString(final Object obj) {
