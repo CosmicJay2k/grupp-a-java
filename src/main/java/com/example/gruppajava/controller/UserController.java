@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,11 +17,12 @@ import com.example.gruppajava.entity.User;
 import com.example.gruppajava.repository.CarRepository;
 import com.example.gruppajava.repository.UserRepository;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 public class UserController {
 
     UserRepository userRepository;
-    CarRepository  carRepository;
+    CarRepository carRepository;
 
     public UserController(UserRepository userRepository, CarRepository carRepository) {
         this.userRepository = userRepository;
@@ -41,28 +43,27 @@ public class UserController {
     }
 
     public record AddCarToUser(
-        String licensePlateNr,
-        String model,
-        String email
-    ) {}
+            String licensePlateNr,
+            String model,
+            String email) {
+    }
 
     @PostMapping("/api/users")
     public Car addUserCar(@RequestBody AddCarToUser req) {
         var newCar = new Car(
-            req.licensePlateNr,
-            req.model,
-            userRepository.findByEmail(req.email).isPresent() 
-              ? userRepository.findByEmail(req.email).get()
-              : null
-        );
+                req.licensePlateNr,
+                req.model,
+                userRepository.findByEmail(req.email).isPresent()
+                        ? userRepository.findByEmail(req.email).get()
+                        : null);
 
         return carRepository.save(newCar);
 
         // URI location = ServletUriComponentsBuilder
-        //         .fromCurrentRequest()
-        //         .path("/{id}")
-        //         .buildAndExpand(newCar.getId())
-        //         .toUri();
+        // .fromCurrentRequest()
+        // .path("/{id}")
+        // .buildAndExpand(newCar.getId())
+        // .toUri();
 
         // return ResponseEntity.created(location).body(newCar);
     }

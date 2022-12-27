@@ -45,8 +45,8 @@ function addUserToDatabase() {
     email: email,
   };
 
-  window.localStorage.setItem("data",  JSON.stringify(data));
-  window.localStorage.setItem("token", keycloak.token) 
+  window.localStorage.setItem("data", JSON.stringify(data));
+  window.localStorage.setItem("token", keycloak.token);
 
   const url = "http://localhost:8080/api/user";
   const req = new XMLHttpRequest();
