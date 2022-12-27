@@ -17,7 +17,7 @@ import com.example.gruppajava.entity.User;
 import com.example.gruppajava.repository.CarRepository;
 import com.example.gruppajava.repository.UserRepository;
 
-@CrossOrigin(maxAge = 3600)
+@CrossOrigin(origins = "*")
 @RestController
 public class UserController {
 
