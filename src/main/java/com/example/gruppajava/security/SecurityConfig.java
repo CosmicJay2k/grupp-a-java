@@ -16,6 +16,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
+                .cors()
+                .and()
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.GET, "/api/**").authenticated()
                 .requestMatchers(HttpMethod.POST, "/api/**").authenticated()
@@ -33,7 +35,7 @@ public class SecurityConfig {
     @Bean
     public JwtDecoder jwtDecoder() {
         return NimbusJwtDecoder
-                .withJwkSetUri("http://localhost:8000/realms/sharkPark/protocol/openid-connect/certs")
+                .withJwkSetUri("http://host.docker.internal:8000/realms/sharkPark/protocol/openid-connect/certs")
                 .jwsAlgorithm(SignatureAlgorithm.ES256)
                 .build();
     }
