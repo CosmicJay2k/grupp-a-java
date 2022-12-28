@@ -1,8 +1,8 @@
 FROM maven:3.8.6-openjdk-18-slim as build
 COPY ./ /src
-RUN mvn clean package
+RUN mvn -f /src/pom.xml clean package
 
-FROM openjdk:19-jdk-alpine
+FROM eclipse-temurin:19-jre-alpine
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
