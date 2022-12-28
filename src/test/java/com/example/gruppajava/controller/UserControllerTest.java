@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.example.gruppajava.entity.User;
+import com.example.gruppajava.repository.CarRepository;
 import com.example.gruppajava.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -27,7 +28,8 @@ public class UserControllerTest {
 
     @MockBean
     UserRepository userRepository;
-
+    @MockBean
+    CarRepository carRepository;
     @Autowired
     private MockMvc mvc;
 
