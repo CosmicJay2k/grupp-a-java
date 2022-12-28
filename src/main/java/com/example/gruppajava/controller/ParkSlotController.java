@@ -45,7 +45,7 @@ public class ParkSlotController {
   }
   
   // POST POST POST POST
-  record addParkSlotReq(
+  record AddParkSlotReq(
     long zone_id, //ParkPriceZone zone,
     boolean available
   ){}
