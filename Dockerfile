@@ -1,6 +1,6 @@
 FROM maven:3.8.6-openjdk-18-slim as build
 COPY ./ /src
-RUN mvn -f /src/pom.xml clean package
+RUN mvn clean package
 
 FROM openjdk:19-jdk-alpine
 ARG JAR_FILE=target/*.jar
