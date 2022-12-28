@@ -39,5 +39,4 @@ public class SecurityConfig {
                 .jwsAlgorithm(SignatureAlgorithm.ES256)
                 .build();
     }
-
 }
