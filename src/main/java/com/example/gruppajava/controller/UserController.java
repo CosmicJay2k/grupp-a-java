@@ -48,7 +48,7 @@ public class UserController {
             String email) {
     }
 
-    @PostMapping("/users")
+    @PostMapping("users/{id}/cars")
     public Car addUserCar(@RequestBody AddCarToUser req) {
         var newCar = new Car(
                 req.licensePlateNr,
