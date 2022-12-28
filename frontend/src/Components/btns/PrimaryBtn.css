@@ -13,5 +13,6 @@ button.primary-btn {
 
 button.primary-btn:hover {
   cursor: pointer;
-  background-color: rgb(214, 142, 91);
+  background-color: #AE4986;
+  color: #ECEBE4;
 }

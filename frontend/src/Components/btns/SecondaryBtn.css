@@ -10,3 +10,8 @@ button.secondary-btn {
   font-weight: bolder;
   font-size: 1.8rem;
 }
+
+button.secondary-btn:hover {
+  cursor: pointer;
+  background-color: #AE4986;
+}
