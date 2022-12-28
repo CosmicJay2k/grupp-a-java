@@ -20,7 +20,7 @@ import com.example.gruppajava.repository.UserRepository;
 public class UserController {
 
     UserRepository userRepository;
-    CarRepository  carRepository;
+    CarRepository carRepository;
 
     public UserController(UserRepository userRepository, CarRepository carRepository) {
         this.userRepository = userRepository;
@@ -41,28 +41,27 @@ public class UserController {
     }
 
     public record AddCarToUser(
-        String licensePlateNr,
-        String model,
-        String email
-    ) {}
+            String licensePlateNr,
+            String model,
+            String email) {
+    }
 
     @PostMapping("/api/users")
     public Car addUserCar(@RequestBody AddCarToUser req) {
         var newCar = new Car(
-            req.licensePlateNr,
-            req.model,
-            userRepository.findByEmail(req.email).isPresent() 
-              ? userRepository.findByEmail(req.email).get()
-              : null
-        );
+                req.licensePlateNr,
+                req.model,
+                userRepository.findByEmail(req.email).isPresent()
+                        ? userRepository.findByEmail(req.email).get()
+                        : null);
 
         return carRepository.save(newCar);
 
         // URI location = ServletUriComponentsBuilder
-        //         .fromCurrentRequest()
-        //         .path("/{id}")
-        //         .buildAndExpand(newCar.getId())
-        //         .toUri();
+        // .fromCurrentRequest()
+        // .path("/{id}")
+        // .buildAndExpand(newCar.getId())
+        // .toUri();
 
         // return ResponseEntity.created(location).body(newCar);
     }
