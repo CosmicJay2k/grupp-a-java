@@ -52,7 +52,7 @@ public class ParkSlotController {
 
   // add a new park slot, (id) generated automatically
   @PostMapping("/api/parkslots")
-  public ResponseEntity<ParkSlot> addParkSlot(@RequestBody addParkSlotReq req){
+  public ResponseEntity<ParkSlot> AddParkSlot(@RequestBody addParkSlotReq req){
     ParkSlot parkslot = new ParkSlot(
       req.zone_id,
       req.available
