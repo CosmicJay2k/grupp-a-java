@@ -11,3 +11,14 @@ services:
     restart: always
     ports:
       - "3306:3306"
+  keycloak_client:
+    image: quay.io/keycloak/keycloak:20.0.2
+    environment:
+     - KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN_NAME}
+     - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD}
+    command:
+     start-dev --import-realm&&--db=mysql --features=token-exchange&&db-url="http://localhost:3306" --db-username=${SPRING_DATASOURCE_USER} --db-password=${SPRING_DATASOURCE_PASSWORD}
+    volumes: 
+      -  ./keycloak/realms:/opt/keycloak/data/import
+    ports:
+      - "8000:8080"
