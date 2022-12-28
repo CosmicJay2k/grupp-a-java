@@ -9,7 +9,7 @@ export default function StartedEventBar() {
     interval = setInterval(() => {
       setMs(prev => prev + 10)
     }, 10)
-  }, [])
+  }, [ms])
 
   return (
     <div id="started-event-bar">

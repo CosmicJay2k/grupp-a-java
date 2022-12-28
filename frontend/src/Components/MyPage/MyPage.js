@@ -4,6 +4,7 @@ import AddCarForm from "Components/forms/AddCarForm/AddCarForm";
 import StartEventForm from "Components/forms/StartEventForm/StartEventForm"
 import MyParkingEvents from "Components/MyParkingEvents/MyParkingEvents";
 import StartedEventBar from "Components/StartedEventBar/startedEventBar";
+import LoginService from "keycloak";
 import VerticalMenuLayout from "Layouts/VerticalMenuLayout/VerticalMenuLayout";
 import { useState } from "react"
 import "./MyPage.css"
@@ -31,7 +32,7 @@ export default function MyPage ({userName}) {
   }
   return (
     <section id="my-page">
-      <VerticalMenuLayout userName={userName}> 
+      <VerticalMenuLayout userName={localStorage.getItem("name")}> 
         <SecondaryBtn text="start parking" clickFn={getStartParkingForm}/>
         <SecondaryBtn text="my parkings" clickFn={getMyParkingCard}/>
         <SecondaryBtn text="add car" clickFn={getAddCarForm} />
