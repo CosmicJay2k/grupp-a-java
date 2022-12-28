@@ -23,9 +23,7 @@ services:
     ports:
       - "8000:8080"
   spring-boot:
-    build:
-      context: ./
-      dockerfile: Dockerfile
+    image: ghcr.io/cosmicjay2k/grupp-a-java:latest
     environment:
       - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
       - SPRING_DATASOURCE_USER=${SPRING_DATASOURCE_USER}
@@ -35,3 +33,16 @@ services:
     depends_on:
       - "DB"
     restart: always
+  # spring-boot:
+  #   build:
+  #     context: ./
+  #     dockerfile: Dockerfile
+  #   environment:
+  #     - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+  #     - SPRING_DATASOURCE_USER=${SPRING_DATASOURCE_USER}
+  #     - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+  #   ports:
+  #     - "8080:8080"
+  #   depends_on:
+  #     - "DB"
+  #   restart: always
