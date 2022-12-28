@@ -39,7 +39,7 @@ export default function MyPage ({userName}) {
       </VerticalMenuLayout>
       <div id="my-page-body">
         { startedEvent ? <StartedEventBar /> : <></> }
-        <div class="form-container">
+        <div className="form-container">
           {child}
         </div>
       </div>
