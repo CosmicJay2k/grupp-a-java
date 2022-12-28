@@ -3,6 +3,7 @@ import FormLayout from "Layouts/FormLayout/FormLayout";
 import FormInput from "Components/forms/FormInput/FormInput";
 import { useState } from "react";
 import SharkParkLogo from "Components/SharkParkLogo/SharkParkLogo";
+import FormTitle from 'Components/forms/FormTitle/FormTitle';
 
 export default function AddCarForm({changeForm}){
   const [formData, setFormData] = useState({
@@ -25,7 +26,7 @@ export default function AddCarForm({changeForm}){
   return (
     <div id="add-car-form">
       <div id="shark-park-logo">
-        <SharkParkLogo />
+        <FormTitle text="add car to your garage"/>
       </div>
       <FormLayout redirectFn={changeForm} btnText="create car">
         <FormInput inputId="licensePlateNr-input" pHolderText="Enter License plate nr..." getInputValue={setLicensePlate} />

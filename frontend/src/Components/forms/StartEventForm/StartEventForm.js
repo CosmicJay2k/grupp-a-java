@@ -3,6 +3,7 @@ import FormLayout from "Layouts/FormLayout/FormLayout";
 import FormInput from "Components/forms/FormInput/FormInput";
 import { useEffect, useState } from "react";
 import SharkParkLogo from "Components/SharkParkLogo/SharkParkLogo";
+import FormTitle from '../FormTitle/FormTitle';
 
 export default function StartEventForm({changeForm}){
 
@@ -67,7 +68,7 @@ export default function StartEventForm({changeForm}){
   return (
     <div id="start-event-form">
       <div id="shark-park-logo">
-        <SharkParkLogo />
+        <FormTitle text="my parking events" />
       </div>
       <FormLayout redirectFn={changeForm} btnText="start parking">
         <FormInput inputId="userID-input" pHolderText="Enter License plate nr..." getInputValue={setUserId} />

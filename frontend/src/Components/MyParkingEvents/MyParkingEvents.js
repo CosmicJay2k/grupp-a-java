@@ -3,13 +3,14 @@ import { useState } from "react";
 import SharkParkLogo from "Components/SharkParkLogo/SharkParkLogo";
 import PrimaryBtn from 'Components/btns/PrimaryBtn';
 import StartEventForm from 'Components/forms/StartEventForm/StartEventForm';
+import FormTitle from 'Components/forms/FormTitle/FormTitle';
 
 export default function MyParkingEvents({ ChangeForm, children }){
 
   return (
     <div id="my-parking-event-container">
       <div id="shark-park-logo">
-        <SharkParkLogo />
+        <FormTitle text="my parking events"/>
       </div>
       <div id="card-container">
         {children}
