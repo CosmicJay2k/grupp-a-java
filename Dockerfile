@@ -3,8 +3,8 @@ COPY ./ /src
 RUN mvn -f /src/pom.xml clean package
 
 FROM eclipse-temurin:19-jre-alpine
-ARG JAR_FILE=src/target/*.jar
-COPY ${JAR_FILE} app.jar
+# ARG JAR_FILE=src/target/*.jar
+COPY --from=build /src/target/*.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
 
 
