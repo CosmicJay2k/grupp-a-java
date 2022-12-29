@@ -12,4 +12,5 @@ Docker<br>
     KEYCLOAK_ADMIN_NAME=<em>admin</em><br>
     KEYCLOAK_ADMIN_PASSWORD=<em>admin</em><br>
 3. Run __docker compose -f ./SetupCompose.yml up -d__.<br>
-4. Visit __localhost:3000__ <br>
+4. cd to <em>frontend/</em> and run <em>npm install</em> and <em>npm run start</em>
+5. Visit __localhost:3000__ <br>
