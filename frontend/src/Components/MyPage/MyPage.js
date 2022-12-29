@@ -12,7 +12,8 @@ import "./MyPage.css"
 export default function MyPage ({userName}) {
   const [child, setChild] = useState();
   const [startedEvent, setStartedEvent] = useState(false)
-
+  const [running, setRunning] = useState(false); 
+  
   function getAddCarForm(){
     setChild(<AddCarForm/>)
   }
@@ -30,6 +31,7 @@ export default function MyPage ({userName}) {
   function getStartParkingForm(){
     setChild(<StartEventForm changeForm={setStartedEvent} />)
   }
+
   return (
     <section id="my-page">
       <VerticalMenuLayout userName={localStorage.getItem("name")}> 
