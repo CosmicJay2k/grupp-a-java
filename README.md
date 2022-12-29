@@ -1,15 +1,15 @@
 ## Spring Boot API with Keycloak and mySql in docker, React frontend, and CI on GitHub 
 
-Prerequisites:
-Docker
+Prerequisites:<br>
+Docker<br>
 
-1. Clone repo.
-    a. Create a .env in root folder containing:
-        SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/test
-        SPRING_DATASOURCE_USER=_user_
-        SPRING_DATASOURCE_PASSWORD=_password_
-        SQL_SERVER_NAME=_test_
-        KEYCLOAK_ADMIN_NAME=_admin_
-        KEYCLOAK_ADMIN_PASSWORD=_admin_
-    b. Run _docker compose -f ./SetupCompose.yml up -d_.
-2. Visit _localhost:3000_ 
+1. Clone repo.<br>
+    a. Create a __.env__ in root folder containing:<br>
+        SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/test<br>
+        SPRING_DATASOURCE_USER=<em>user</em><br>
+        SPRING_DATASOURCE_PASSWORD=<em>password</em><br>
+        SQL_SERVER_NAME=<em>test</em><br>
+        KEYCLOAK_ADMIN_NAME=<em>admin</em><br>
+        KEYCLOAK_ADMIN_PASSWORD=<em>admin</em><br>
+    b. Run __docker compose -f ./SetupCompose.yml up -d__.<br>
+2. Visit __localhost:3000__ <br>
