@@ -22,6 +22,7 @@ services:
     command: start-dev --import-realm&&--db=mysql --features=token-exchange&&db-url="http://localhost:3306" --db-username=${SPRING_DATASOURCE_USER} --db-password=${SPRING_DATASOURCE_PASSWORD}
     ports:
       - "8000:8080"
+  # WHEN IMAGE EXISTS ON GITHUB
   spring-boot:
     image: ghcr.io/cosmicjay2k/grupp-a-java:latest
     environment:
@@ -33,16 +34,17 @@ services:
     depends_on:
       - "DB"
     restart: always
-  # spring-boot:
-  #   build:
-  #     context: ./
-  #     dockerfile: Dockerfile
-  #   environment:
-  #     - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
-  #     - SPRING_DATASOURCE_USER=${SPRING_DATASOURCE_USER}
-  #     - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
-  #   ports:
-  #     - "8080:8080"
-  #   depends_on:
-  #     - "DB"
-  #   restart: always
+# WHEN RUNNING LOCAL
+# spring-boot:
+#   build:
+#     context: ./
+#     dockerfile: Dockerfile
+#   environment:
+#     - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+#     - SPRING_DATASOURCE_USER=${SPRING_DATASOURCE_USER}
+#     - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+#   ports:
+#     - "8080:8080"
+#   depends_on:
+#     - "DB"
+#   restart: always
