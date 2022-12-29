@@ -2,19 +2,19 @@ import './EventCard.css'
 
 export default function EventCard({price, dateTime, btnText}){
   return(
-    <article class="event-card">
-      <div class="EventCard-inner-card">
-        <div class="EventCard-header-container">
+    <article className="event-card">
+      <div className="EventCard-inner-card">
+        <div className="EventCard-header-container">
         <h3>
           {price}
           </h3>
         </div>
-        <div class="EventCard-text-container">
+        <div className="EventCard-text-container">
           <p>
             {dateTime}
             </p> 
         </div>
-        <div class="EventCard-btn-container">
+        <div className="EventCard-btn-container">
           <button> 
             {btnText} 
           </button>

@@ -4,6 +4,7 @@ import AddCarForm from "Components/forms/AddCarForm/AddCarForm";
 import StartEventForm from "Components/forms/StartEventForm/StartEventForm"
 import MyParkingEvents from "Components/MyParkingEvents/MyParkingEvents";
 import StartedEventBar from "Components/StartedEventBar/startedEventBar";
+import LoginService from "keycloak";
 import VerticalMenuLayout from "Layouts/VerticalMenuLayout/VerticalMenuLayout";
 import { useState } from "react"
 import "./MyPage.css"
@@ -11,7 +12,8 @@ import "./MyPage.css"
 export default function MyPage ({userName}) {
   const [child, setChild] = useState();
   const [startedEvent, setStartedEvent] = useState(false)
-
+  const [running, setRunning] = useState(false); 
+  
   function getAddCarForm(){
     setChild(<AddCarForm/>)
   }
@@ -29,16 +31,17 @@ export default function MyPage ({userName}) {
   function getStartParkingForm(){
     setChild(<StartEventForm changeForm={setStartedEvent} />)
   }
+
   return (
     <section id="my-page">
-      <VerticalMenuLayout userName={userName}> 
+      <VerticalMenuLayout userName={localStorage.getItem("name")}> 
         <SecondaryBtn text="start parking" clickFn={getStartParkingForm}/>
         <SecondaryBtn text="my parkings" clickFn={getMyParkingCard}/>
         <SecondaryBtn text="add car" clickFn={getAddCarForm} />
       </VerticalMenuLayout>
       <div id="my-page-body">
         { startedEvent ? <StartedEventBar /> : <></> }
-        <div class="form-container">
+        <div className="form-container">
           {child}
         </div>
       </div>

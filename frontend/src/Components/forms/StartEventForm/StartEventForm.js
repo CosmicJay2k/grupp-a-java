@@ -25,7 +25,7 @@ export default function StartEventForm({changeForm}){
         slotId: "",
       }
     )
-  }, [formData])
+  }, [])
 
 
   /*============================================ *\
@@ -70,7 +70,7 @@ export default function StartEventForm({changeForm}){
       <div id="shark-park-logo">
         <FormTitle text="Create a parking event" />
       </div>
-      <FormLayout redirectFn={changeForm(true)} btnText="start parking">
+      <FormLayout redirectFn={() => changeForm(true)} btnText="start parking">
         <FormInput inputId="userID-input" pHolderText="Enter user id..." getInputValue={setUserId} />
         <FormInput inputId="carID-input" pHolderText="Enter car id..." getInputValue={setCarId} />
         <FormInput inputId="slotID-input" pHolderText="Enter parking slot id..." getInputValue={setSlotId} />
