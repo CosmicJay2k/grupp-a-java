@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,6 +49,18 @@ public class ParkingEventController {
         return ResponseEntity.created(location).body(parkingEvent);
     }
 
+    // Stop a parking event.
+    @PutMapping("parkingevents/{id}")
+    public ResponseEntity<ParkingEvent> stopParkingEvent(@PathVariable Long id) {
+        ParkingEvent parkingEvent = parkingEventService.stopParkingEvent(id);
+        URI location = ServletUriComponentsBuilder
+            .fromCurrentRequest()
+            .path("/{id}")
+            .buildAndExpand(parkingEvent.getId())
+            .toUri();
+        return ResponseEntity.created(location).body(parkingEvent);
+    }
+
     // Get parking event by id.
     @GetMapping("parkingevents/{id}")
     public ParkingEvent getParkingEventById(@PathVariable Long id) {
@@ -66,7 +79,7 @@ public class ParkingEventController {
         .queryParam("eventDurationMin", eventDurationMin)
         .buildAndExpand(parkingEvent.getId())
         .toUri();
-        return ResponseEntity.created(location).body(parkingEvent);
+    return ResponseEntity.created(location).body(parkingEvent);
 }
 
     // Get parking event by user id.

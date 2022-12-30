@@ -1,7 +1,9 @@
 package com.example.gruppajava.Service;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -44,6 +46,25 @@ public class ParkingEventServiceImpl implements ParkingEventService {
         parkingEvent.setEndTime(LocalDateTime.now().plusMinutes(10));
         parkingEvent.setActive(true);
         parkingEvent.setPaid(false);
+        parkingEventRepository.save(parkingEvent);
+        return parkingEvent;
+    }
+
+    @Override
+    public ParkingEvent stopParkingEvent(Long id) {
+        Optional<ParkingEvent> optionalParkingEvent = parkingEventRepository.findById(id);
+        if (!optionalParkingEvent.isPresent()) {
+            throw new RuntimeException("ParkingEvent not founnd");
+        }
+        ParkingEvent parkingEvent = optionalParkingEvent.get();
+        LocalDateTime startTime = parkingEvent.getStartTime();
+        LocalDateTime endTime = LocalDateTime.now();
+        long duration = Duration.between(startTime, endTime).toMinutes();
+        double price = duration * 0.17; // 0.17 kr/min ca. 10 kr/h ...
+        price = Math.round(price * 100);
+        parkingEvent.setPrice(price / 100); // 2 decimals.
+        parkingEvent.setEndTime(endTime);
+        parkingEvent.setActive(false);
         parkingEventRepository.save(parkingEvent);
         return parkingEvent;
     }

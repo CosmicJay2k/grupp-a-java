@@ -36,52 +36,54 @@ public class ParkingEvent {
     private boolean isActive;
     @Column(name = "is_paid", nullable = false)
     private boolean isPaid;
+    @Column(name = "price", nullable = true)
+    private double price;
 
     // Getters and setters.
     public Long getId() {
         return id;
     }
-
+    
     public void setId(Long id) {
         this.id = id;
     }
-
+    
     public User getUser() {
         return user;
     }
-
+    
     public void setUser(User user) {
         this.user = user;
     }
-
+    
     public Car getCar() {
         return car;
     }
-
+    
     public void setCar(Car car) {
         this.car = car;
     }
-
+    
     public LocalDateTime getStartTime() {
         return startTime;
     }
-
+    
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
-
+    
     public LocalDateTime getEndTime() {
         return endTime;
     }
-
+    
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
-
+    
     public ParkSlot getParkSlot() {
         return parkSlot;
     }
-
+    
     public void setParkSlot(ParkSlot parkSlot) {
         this.parkSlot = parkSlot;
     }
@@ -89,17 +91,24 @@ public class ParkingEvent {
     public boolean isActive() {
         return isActive;
     }
-
+    
     public void setActive(boolean isActive) {
         this.isActive = isActive;
     }
-
+    
     public boolean isPaid() {
         return isPaid;
     }
-
+    
     public void setPaid(boolean isPaid) {
         this.isPaid = isPaid;
     }
-
+    
+    public double getPrice() {
+        return price;
+    }
+    
+    public void setPrice(double price) {
+        this.price = price;
+    }
 }
