@@ -29,11 +29,9 @@ public class ParkingEvent {
     private LocalDateTime startTime;
     @Column(name = "end_time", nullable = false)
     private LocalDateTime endTime;
-    // Fix when parkingslot entity exists.
-    // @OneToOne
-    // @JoinColumn(name = "slot_id", referencedColumnName = "id")
-    // private ParkingSlot parkingslot;
-    private int slotId;
+    @OneToOne
+    @JoinColumn(name = "slot_id", referencedColumnName = "id", nullable = false)
+    private ParkSlot parkSlot;
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
     @Column(name = "is_paid", nullable = false)
@@ -80,16 +78,14 @@ public class ParkingEvent {
         this.endTime = endTime;
     }
 
-    // Fix when slot entity exists.
-    public int getSlotId() {
-        return slotId;
+    public ParkSlot getParkSlot() {
+        return parkSlot;
     }
 
-    // Fix when slot entity exists.
-    public void setSlotId(int slotId) {
-        this.slotId = slotId;
+    public void setParkSlot(ParkSlot parkSlot) {
+        this.parkSlot = parkSlot;
     }
-
+    
     public boolean isActive() {
         return isActive;
     }
